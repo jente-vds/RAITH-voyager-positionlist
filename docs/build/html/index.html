@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>Voyager-python’s documentation &#8212; voyager 0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="gettingstarted.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gettingstarted.html" title="Getting Started"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">voyager 0.9.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Voyager-python’s documentation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="voyager-python-s-documentation">
+<h1>Voyager-python’s documentation<a class="headerlink" href="#voyager-python-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The RAITH VOYAGER is an electron beam lithography system. It takes an input file containing polygons, paths and shapes in order to write these structures on a sample. The most commonly used file is a GDSII file, with a <code class="docutils literal notranslate"><span class="pre">.gds</span></code> extension.</p>
+<p>After importing a GDSII file in the VOYAGER, you have to create a positionlist (<code class="docutils literal notranslate"><span class="pre">.pls</span></code>). This is a list specifiying which cells of the GDSII to write at what location, with what dosefactor, what area of the cell, what layers, etc.
+However, despite being able to perform certain bulk operations, this is still an extremely tenuous process, since each cell has to be loaded individually, values can not be changed in bulk, and in order to change parameters, you often have to rely on submenus. Furthermore, creating a positionlist is usually done behind the VOYAGER, decreasing uptime. The mindnumbing process that is creating a positionlist also gives a change of introducing human errors.</p>
+<p>This Python package is meant to mitigate this and allow users to create positionlist from behind their own computer. The package is designed to work with gdstk, a python package for creating GDSII files (<a class="reference external" href="https://github.com/heitzmann/gdstk">https://github.com/heitzmann/gdstk</a>). It can also work with the deprecated package gdspy, however, its usage is not advised.</p>
+<span class="target" id="module-voyager"></span><div class="toctree-wrapper compound">
+<p><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#first-gdsii-and-positionlist">First GDSII and Positionlist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#advanced-examples">Advanced examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#positionlist">Positionlist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#id1">Positionlist</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gettingstarted.html"
+                        title="next chapter">Getting Started</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gettingstarted.html" title="Getting Started"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">voyager 0.9.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Voyager-python’s documentation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Jente Vandersmissen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+    </div>
+  </body>
+</html>

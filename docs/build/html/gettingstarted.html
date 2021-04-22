@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>Getting Started &#8212; voyager 0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API reference" href="reference.html" />
+    <link rel="prev" title="Voyager-python’s documentation" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reference.html" title="API reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Voyager-python’s documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">voyager 0.9.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<section id="first-gdsii-and-positionlist">
+<h2>First GDSII and Positionlist<a class="headerlink" href="#first-gdsii-and-positionlist" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start by importing the modules, creating our first GDSII cell and initiating a Positionlist:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdstk</span>
+<span class="kn">import</span> <span class="nn">voyager</span> <span class="k">as</span> <span class="nn">vyg</span>
+
+<span class="c1"># The GDSII file is called a library, which contains multiple cells.</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+<span class="c1"># Define a layer and datatype.</span>
+<span class="n">ld_0</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;layer&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">}</span>
+<span class="n">ld_1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;layer&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span><span class="mi">1200</span><span class="p">}</span>
+
+<span class="c1"># Initiate a Positionlist using the 12x12mm wafermap</span>
+<span class="n">pls</span> <span class="o">=</span> <span class="n">vyg</span><span class="o">.</span><span class="n">Positionlist</span><span class="p">(</span><span class="s2">&quot;12x12mm.wlo&quot;</span><span class="p">)</span>
+
+<span class="c1"># Geometry must be placed in cells.</span>
+<span class="n">cell_1</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Cell</span><span class="p">(</span><span class="s2">&quot;First_cell&quot;</span><span class="p">)</span>
+<span class="n">cell_2</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Cell</span><span class="p">(</span><span class="s2">&quot;Second_cell&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create the geometry (a single rectangle) in layer 0 and add it to the first cell.</span>
+<span class="n">rect</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="o">**</span><span class="n">ld_0</span><span class="p">)</span>
+<span class="n">cell_1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+
+<span class="c1"># Add the two cells to the positionlist.</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell_1</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="o">=</span><span class="n">cell_2</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mf">3.2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dosefactor</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Create another geometry (a circle) in layer 1 and add it to the second cell.</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">ellipse</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="o">**</span><span class="n">ld_1</span><span class="p">)</span>
+<span class="n">cell_2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+
+<span class="c1"># Print the current status of the positionlist.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pls</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After importing the <cite>gdstk</cite> and <cite>voyager</cite> modules, we create a positionlist <cite>pls</cite> with a 12x12mm wafermap.
+We add structures to the cells and we add those cells to the positionlist at the desired positions and patterning the desired layer(s).</p>
+<p>Let us add some more structures and do manipulation on them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add another Polygon to cell_2</span>
+<span class="n">ellipse</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">ellipse</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">layer</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">cell_2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+
+<span class="c1"># Add the cell to the positionlist at another position, but this time with both layers</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell_2</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Create a matrix copy of the second entry</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">matrixCopy</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">row_vector</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">column_vector</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">dose_change</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="mf">1.1</span><span class="p">),</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;ID == 2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Review the positionlist</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">printout</span><span class="p">([</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Comment&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;Area&#39;</span><span class="p">,</span> <span class="s1">&#39;Layer&#39;</span><span class="p">,</span> <span class="s1">&#39;DoseFactor&#39;</span><span class="p">])</span>
+
+<span class="c1"># We still miss an area entry. So let us update the areas</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">updateArea</span><span class="p">()</span>
+
+<span class="c1"># Review the positionlist again</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">printout</span><span class="p">([</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Comment&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;Area&#39;</span><span class="p">,</span> <span class="s1">&#39;Layer&#39;</span><span class="p">,</span> <span class="s1">&#39;DoseFactor&#39;</span><span class="p">])</span>
+
+<span class="c1"># Write out the positionlist</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;example.pls&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Oops, something happened. Apparently we still have to assign a file to the positionlist. When you load the positionlist in the VOYAGER, it has to read the cells it wishes to write from a (GDSII) file. We will have to give it the path to said file, respective to <code class="docutils literal notranslate"><span class="pre">%UserRoot%GDSII\</span></code>. Note that we are talking about a Windows path, which uses backslashes (<code class="docutils literal notranslate"><span class="pre">'\'</span></code> in Python) as folder separation.
+Furthermore, if you forget an area in your positionlist, you will also receive a warning before being able to write.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assign a file to the positionlist</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">assignFile</span><span class="p">(</span><span class="s2">&quot;example.gds&quot;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s review the postionlist first</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Now we can save it all</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;example.gds&quot;</span><span class="p">)</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;example.pls&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We now place the GDSII file at location <code class="docutils literal notranslate"><span class="pre">%UserRoot%GDSII\example.gds</span></code> and we load <code class="docutils literal notranslate"><span class="pre">example.pls</span></code> in the VOYAGER.</p>
+</section>
+<section id="advanced-examples">
+<h2>Advanced examples<a class="headerlink" href="#advanced-examples" title="Permalink to this headline">¶</a></h2>
+<p>Let us try another example, but this time a little more difficult. It will demonstrate why using <code class="docutils literal notranslate"><span class="pre">voyager-python</span></code> is so much easier and faster than using the VOYAGER itself to create positionlists.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the necessary modules</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gdstk</span>
+<span class="kn">import</span> <span class="nn">voyager</span> <span class="k">as</span> <span class="nn">vyg</span>
+
+<span class="c1">#Initiate an empty GDSII library and an empty positionlist, as well as the layer and datatype</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+<span class="n">pls</span> <span class="o">=</span> <span class="n">vyg</span><span class="o">.</span><span class="n">Positionlist</span><span class="p">(</span><span class="s1">&#39;20mm2.wlo&#39;</span><span class="p">)</span>
+<span class="n">ld</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;layer&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">}</span>
+
+<span class="c1"># We wish to create an array of antennas, where we vary the pitch and size of the antennas</span>
+<span class="c1"># We furthermore wih to pattern these in an array, where their position corresponds to their parameters</span>
+<span class="n">pitches</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">lengths</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">widths</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Let us define a function to add such an array of size 10x10 to a cell, depending on pitch, length, and width.</span>
+<span class="k">def</span> <span class="nf">arr</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+     <span class="n">pos</span> <span class="o">=</span> <span class="n">pitch</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">:</span>
+                     <span class="n">cell</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gdstk</span><span class="o">.</span><span class="n">rectangle</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">length</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">length</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">datatype</span><span class="p">))</span>
+
+<span class="c1"># Now we can start creating all of these</span>
+<span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">:</span>
+     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lengths</span><span class="p">):</span>
+             <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">width</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">widths</span><span class="p">):</span>
+                     <span class="c1"># Create a cell</span>
+                     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;p</span><span class="si">{0}</span><span class="s1">_l</span><span class="si">{1}</span><span class="s1">_w</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="o">*</span><span class="n">length</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="o">*</span><span class="n">width</span><span class="p">))</span>
+                     <span class="n">cell</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Cell</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                     <span class="c1"># Add the structures to the cell</span>
+                     <span class="n">arr</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">ld</span><span class="p">)</span>
+                     <span class="c1"># Add the cell to the GDSII library</span>
+                     <span class="n">lib</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+                     <span class="c1"># Add an entry containing said cell to the positionlist</span>
+                     <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mf">7.7</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">pitch</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="o">.</span><span class="mi">200</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="mf">4.4</span> <span class="o">+</span> <span class="p">(</span><span class="n">pitch</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span> <span class="o">-</span> <span class="o">.</span><span class="mi">200</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+                     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+
+<span class="c1"># We can also add markers</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lengths</span><span class="p">):</span>
+     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;length</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="o">*</span><span class="n">length</span><span class="p">))</span>
+     <span class="n">cell</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Cell</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+     <span class="n">cell</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="n">gdstk</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;length </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="o">*</span><span class="n">length</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">4.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">8.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">8.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">width</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">widths</span><span class="p">):</span>
+     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;width</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="o">*</span><span class="n">width</span><span class="p">))</span>
+     <span class="n">cell</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Cell</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+     <span class="n">cell</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="n">gdstk</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;width </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="o">*</span><span class="n">width</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">4.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">8.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+     <span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">8.4</span><span class="o">-</span><span class="mf">0.200</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+
+<span class="c1"># Now of course, everything is ordered poorly. So let us change it such that those things near each other, will be written after one another</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">shortSort</span><span class="p">()</span>
+
+<span class="c1"># Let us also make sure that all the structres we write will be centered at the the writefield, and not in the corner, as the VOYAGER is apt to do.</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">setArea</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">]))</span>
+
+<span class="c1"># Now let us check the ordering and the structures</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Add a file</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">assignFile</span><span class="p">(</span><span class="s1">&#39;example_advanced.gds&#39;</span><span class="p">)</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="s1">&#39;example_adanced.gds&#39;</span><span class="p">)</span>
+<span class="n">pls</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;example_advanced.pls&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#first-gdsii-and-positionlist">First GDSII and Positionlist</a></li>
+<li><a class="reference internal" href="#advanced-examples">Advanced examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Voyager-python’s documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="reference.html"
+                        title="next chapter">API reference</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gettingstarted.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reference.html" title="API reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Voyager-python’s documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">voyager 0.9.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Jente Vandersmissen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+    </div>
+  </body>
+</html>

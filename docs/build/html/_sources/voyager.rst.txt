@@ -1,0 +1,29 @@
+voyager package
+===============
+
+Submodules
+----------
+
+voyager.pls module
+------------------
+
+.. automodule:: voyager.pls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+voyager.wor module
+------------------
+
+.. automodule:: voyager.wor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: voyager
+   :members:
+   :undoc-members:
+   :show-inheritance:
