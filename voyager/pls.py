@@ -1,14 +1,5 @@
 import numpy as np
 import pandas as pd
-#import pkg_resources
-#if 'gdstk' in {pkg.key for pkg in pkg_resources.working_set}:
-#    import gdstk
-#    gdstk_key = True
-#elif 'gdspy' in {pkg.key for pkg in pkg_resources.working_set}:
-#    import gdspy
-#    gdstk_key = False
-#else:
-#    raise ImportError("Not gdstk, nor gdspy is installed. The package will not work.")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon, Rectangle
 import random
