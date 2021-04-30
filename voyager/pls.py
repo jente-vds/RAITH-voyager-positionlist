@@ -1,19 +1,19 @@
 import numpy as np
 import pandas as pd
-import pkg_resources
-if 'gdstk' in {pkg.key for pkg in pkg_resources.working_set}:
-    import gdstk
-    gdstk_key = True
-elif 'gdspy' in {pkg.key for pkg in pkg_resources.working_set}:
-    import gdspy
-    gdstk_key = False
-else:
-    raise ImportError("Not gdstk, nor gdspy is installed. The package will not work.")
+#import pkg_resources
+#if 'gdstk' in {pkg.key for pkg in pkg_resources.working_set}:
+#    import gdstk
+#    gdstk_key = True
+#elif 'gdspy' in {pkg.key for pkg in pkg_resources.working_set}:
+#    import gdspy
+#    gdstk_key = False
+#else:
+#    raise ImportError("Not gdstk, nor gdspy is installed. The package will not work.")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon, Rectangle
 import random
 from copy import copy
-from ._helpers import pls_header, wafermaps, ALL_VOYAGER, colours, rounderupper, dist, distMatrix, entry_adder, polygon_key, func_n
+from ._helpers import pls_header, wafermaps, ALL_VOYAGER, colours, rounderupper, dist, distMatrix, entry_adder, polygon_key, func_n, gdstk_key
 
 class Positionlist:
     """A dataframe containing the data for a positionlist to be used in the RAITH VOYAGER.

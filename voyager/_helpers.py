@@ -2,6 +2,16 @@ import random
 import numpy as np
 from matplotlib.patches import Rectangle, Ellipse
 
+import pkg_resources
+if 'gdstk' in {pkg.key for pkg in pkg_resources.working_set}:
+    import gdstk
+    gdstk_key = True
+elif 'gdspy' in {pkg.key for pkg in pkg_resources.working_set}:
+    import gdspy
+    gdstk_key = False
+else:
+    raise ImportError("Not gdstk, nor gdspy is installed. The package will not work.")
+
 random.seed(12)
 colours = [(random.random(), random.random(), random.random()) for x in range(100)]
 random.seed()
@@ -72,12 +82,21 @@ def distMatrix(arr):
     return matrix
 
 def entry_adder(df, cell, position, layer, dosefactor):
-    if cell.bounding_box() is None:
-        bounds = np.nan
-        SizeU, SizeV = np.nan, np.nan
+    if gdstk_key:
+        if cell.bounding_box() is None:
+            bounds = np.nan
+            SizeU, SizeV = np.nan, np.nan
+        else:
+            bounds = np.array(cell.bounding_box()).flatten()
+            SizeU, SizeV = abs(bounds[2]-bounds[0]), abs(bounds[3]-bounds[1])
     else:
-        bounds = np.array(cell.bounding_box()).flatten()
-        SizeU, SizeV = abs(bounds[2]-bounds[0]), abs(bounds[3]-bounds[1])
+        if cell.get_bounding_box() is None:
+            bounds = np.nan
+            SizeU, SizeV = np.nan, np.nan
+        else:
+            bounds = np.array(cell.get_bounding_box()).flatten()
+            SizeU, SizeV = abs(bounds[2]-bounds[0]), abs(bounds[3]-bounds[1])
+
 
     dictionary = dict()
     for i in df:
@@ -93,5 +112,8 @@ def entry_adder(df, cell, position, layer, dosefactor):
 
 def polygon_key(polygon):
     """ Sort polygons by bounding box"""
-    bb = polygon.bounding_box()
+    if gdstk_key:
+        bb = polygon.bounding_box()
+    else:
+        bb = polygon.get_bounding_box()
     return bb[0]
