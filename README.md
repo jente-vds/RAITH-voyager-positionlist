@@ -11,4 +11,4 @@ A python package to facilitate creating positionlists for RAITH VOYAGER systems.
 python setupy.py install
 
 ## Documentation
-Full documentation (in html format) can e found under `docs/build/html`.
+Full documentation (in html format) can be found under `docs/build/html`.
