@@ -327,11 +327,29 @@ class Positionlist:
         self.df.loc[self.df.query(selection).index, 'V'] = position[1]
 
     def setLink(self, link, selection='@ALL_VOYAGER'):
-        """Set Link for the selected entries."""
+        """
+        Set Link for the selected entries.
+
+        Parameters
+        ----------
+        link : string
+            The required string
+        selection : string
+            The query string with which the entries to change are selected (defaults to ALL).
+        """
         self.df.loc[self.df.query(selection).index, 'Link'] = link
 
     def setDoseFactor(self, dosefactor, selection='@ALL_VOYAGER'):
-        """Set dose factor for the selected entries."""
+        """
+        Set dose factor for the selected entries.
+
+        Parameters
+        ----------
+        dosefactor : float
+            The required dose factor
+        selection : string
+            The query string with which the entries to change are selected (defaults to ALL).
+        """
         self.df.loc[self.df.query(selection).index, 'DoseFactor'] = dosefactor
 
     def setArea(self, area, selection='@ALL_VOYAGER'):
@@ -352,13 +370,28 @@ class Positionlist:
             self.df.at[i, 'Area'] = area
 
     def updateArea(self, overwrite=False):
-        """This function updates all empty areas to the bounding box of the cells. If overwrite is passed, all areas will be updated to the bounding boxes instead."""
-        if overwrite:
-            for i in range(len(self)):
-                self.df.at[i,'Area'] = rounderupper(np.array(self.cells[self.df.at[i,'Comment']].bounding_box()).flatten())
+        """
+        Update empty Area entries to corresponding cell bounding box.
+
+        Parameters
+        ----------
+        overwrite : bool
+            Overwrite non-empty areas as well.
+        """
+        if gdstk_key:
+            if overwrite:
+                for i in range(len(self)):
+                    self.df.at[i,'Area'] = rounderupper(np.array(self.cells[self.df.at[i,'Comment']].bounding_box()).flatten())
+            else:
+                for i in np.where(pd.isnull(self.df['Area'])==True)[0]: 
+                    self.df.at[i,'Area'] = rounderupper(np.array(self.cells[self.df.at[i,'Comment']].bounding_box()).flatten())
         else:
-            for i in np.where(pd.isnull(self.df['Area'])==True)[0]: 
-                self.df.at[i,'Area'] = rounderupper(np.array(self.cells[self.df.at[i,'Comment']].bounding_box()).flatten())
+            if overwrite:
+                for i in range(len(self)):
+                    self.df.at[i,'Area'] = rounderupper(np.array(self.cells[self.df.at[i,'Comment']].get_bounding_box()).flatten())
+            else:
+                for i in np.where(pd.isnull(self.df['Area'])==True)[0]: 
+                    self.df.at[i,'Area'] = rounderupper(np.array(self.cells[self.df.at[i,'Comment']].get_bounding_box()).flatten())
 
 
     def toggleStepsize(self):
@@ -387,7 +420,14 @@ class Positionlist:
         self.df.loc[self.df.query(selection).index, 'StepsizeV'] = stepsize[1]
 
     def setWaferlayout(self, wlo):
-        """Set the wafer layout of the positionlist"""
+        """
+        Set the wafer layout of the positionlist
+
+        Parameters
+        ----------
+        wlo : string
+            The wafermap to set. Possible options are voyager._helpers.wafermaps.keys().
+        """
         self.wlo = wlo
 
     def plot(self, writefield=200, flatten=False, order=False):
@@ -473,4 +513,3 @@ def read_pls(filename):
                 columns.append(name)
     poslist.df = pd.read_csv(filename, header=index_DATA, names=columns, skip_blank_lines=False)
     return poslist
-        

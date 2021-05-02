@@ -255,7 +255,7 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>workingarea</strong> (<em>voyager.WorkingArea</em>) – The working area to be given to the positionlist. Has to be voyager.WorkingArea containing working areas for all the cells in the positionlist.</p></li>
+<li><p><strong>workingarea</strong> (<a class="reference internal" href="#voyager.WorkingArea" title="voyager.WorkingArea"><em>voyager.WorkingArea</em></a>) – The working area to be given to the positionlist. Has to be voyager.WorkingArea containing working areas for all the cells in the positionlist.</p></li>
 <li><p><strong>selection</strong> (<em>string</em>) – Query string to make a selection on which to apply the operation.</p></li>
 </ul>
 </dd>
@@ -308,12 +308,28 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 <dt id="voyager.Positionlist.setLink">
 <code class="sig-name descname"><span class="pre">setLink</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setLink" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set Link for the selected entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>link</strong> (<em>string</em>) – The required string</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – The query string with which the entries to change are selected (defaults to ALL).</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="voyager.Positionlist.setDoseFactor">
 <code class="sig-name descname"><span class="pre">setDoseFactor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dosefactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setDoseFactor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set dose factor for the selected entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dosefactor</strong> (<em>float</em>) – The required dose factor</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – The query string with which the entries to change are selected (defaults to ALL).</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -333,7 +349,12 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 <dl class="py method">
 <dt id="voyager.Positionlist.updateArea">
 <code class="sig-name descname"><span class="pre">updateArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.updateArea" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function updates all empty areas to the bounding box of the cells. If overwrite is passed, all areas will be updated to the bounding boxes instead.</p>
+<dd><p>Update empty Area entries to corresponding cell bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>overwrite</strong> (<em>bool</em>) – Overwrite non-empty areas as well.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -360,6 +381,11 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 <dt id="voyager.Positionlist.setWaferlayout">
 <code class="sig-name descname"><span class="pre">setWaferlayout</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wlo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setWaferlayout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the wafer layout of the positionlist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wlo</strong> (<em>string</em>) – The wafermap to set. Possible options are voyager._helpers.wafermaps.keys().</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -386,6 +412,79 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 </dd></dl>
 
 </section>
+<section id="working-area">
+<h3>Working Area<a class="headerlink" href="#working-area" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="voyager.WorkingArea">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">voyager.</span></code><code class="sig-name descname"><span class="pre">WorkingArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-09</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.WorkingArea" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Registry for the working areas for different cells</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>precision</strong> (<em>float</em>) – The precision determines the amount of blocks in which the working area is divided.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="voyager.WorkingArea.df">
+<code class="sig-name descname"><span class="pre">df</span></code><a class="headerlink" href="#voyager.WorkingArea.df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pandas dataframe that contains the cell names and the corresponding working area boundaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="voyager.WorkingArea.precision">
+<code class="sig-name descname"><span class="pre">precision</span></code><a class="headerlink" href="#voyager.WorkingArea.precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>The precision defined for this .wor file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.WorkingArea.add">
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_area</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.WorkingArea.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a working area for a specific cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cell</strong> (<em>gdstk.Cell</em><em> or </em><em>gdspy.Cell</em>) – The cell for which you wish to add a working area</p></li>
+<li><p><strong>working_area</strong> (<em>list</em><em> or </em><em>numpy array of length 4</em>) – The working area to add to the cell ([left_boundary, bottom_boundary, right_boundary, top_boundary]).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.WorkingArea.delete">
+<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.WorkingArea.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a cell from the list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cell</strong> (<em>gdspy.Cell</em><em> or </em><em>gdstk.Cell</em>) – The cell for which to delete the working areas.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.WorkingArea.write">
+<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.WorkingArea.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write out the working areas to a .wor file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – The filename for the .wor file (e.g. example.wor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 </section>
 
@@ -401,6 +500,7 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 <li><a class="reference internal" href="#">API reference</a><ul>
 <li><a class="reference internal" href="#positionlist">Positionlist</a><ul>
 <li><a class="reference internal" href="#id1">Positionlist</a></li>
+<li><a class="reference internal" href="#working-area">Working Area</a></li>
 </ul>
 </li>
 </ul>

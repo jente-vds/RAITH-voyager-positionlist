@@ -9,8 +9,6 @@ if 'gdstk' in {pkg.key for pkg in pkg_resources.working_set}:
 elif 'gdspy' in {pkg.key for pkg in pkg_resources.working_set}:
     import gdspy
     gdstk_key = False
-else:
-    raise ImportError("Not gdstk, nor gdspy is installed. The package will not work.")
 
 random.seed(12)
 colours = [(random.random(), random.random(), random.random()) for x in range(100)]
