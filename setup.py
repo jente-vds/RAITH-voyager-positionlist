@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
         name='voyager',
-        version='0.9.0',
+        version='0.9.1',
         author='Jente Vandersmissen',
         author_email='j.vandersmissen@amolf.nl',
         license='LICENSE.txt',

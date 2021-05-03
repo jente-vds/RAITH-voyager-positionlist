@@ -1,3 +1,4 @@
+__version__ = "0.9.1"
 import pkg_resources
 if not 'gdstk' in {pkg.key for pkg in pkg_resources.working_set} and not 'gdspy' in {pkg.key for pkg in pkg_resources.working_set}:
     raise ImportError("Not gdstk, nor gdspy is installed. The package will not work.")
