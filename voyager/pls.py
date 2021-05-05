@@ -20,7 +20,7 @@ class Positionlist:
     ----------
     wlo : string
         The name of the wafer layout (with .wlo extension).
-    df : pandas.DataFrame
+    df : ``pandas.DataFrame``
         Pandas DataFrame storing all the necessary info for the VOYAGER, such as position, dose, cell name, etc.
     cells : dictionary
         Dictionary containing all the cells in the positionlist, with the cell names acting as keys.
@@ -259,19 +259,19 @@ class Positionlist:
                         self.df.at[len(self)-1,'DoseFactor'] = func_n(dose_change, i*size[1]+j, self.df.at[k,'DoseFactor'])
 
 
-    def assignWorkingArea(self, workingarea, selection='@ALL_VOYAGER'):
+    def assignWorkingAreas(self, workingarea, selection='@ALL_VOYAGER'):
         """
         Assign a working area to the selected entries.
 
         Parameters
         ----------
-        workingarea : voyager.WorkingArea
-            The working area to be given to the positionlist. Has to be voyager.WorkingArea containing working areas for all the cells in the positionlist.
+        workingarea : voyager.WorkingAreas
+            The working areas to be given to the positionlist. Has to be voyager.WorkingAreas containing working areas for all the cells in the positionlist.
         selection : string
             Query string to make a selection on which to apply the operation.
         """
-        if not isinstance(workingarea, WorkingArea):
-            raise TypeError("The workingArea has to be an instance of class voyager.WorkingArea.")
+        if not isinstance(workingarea, WorkingAreas):
+            raise TypeError("The workingArea has to be an instance of class voyager.WorkingAreas.")
         for i in range(len(self)):
             wa = np.reshape(np.array(workingarea.df[workingarea.df['cell_name'] == self.df.loc[i,'Comment']]['left', 'bottom', 'right', 'top']), 4)
             self.df.loc[i, 'Area'] = wa
@@ -303,7 +303,7 @@ class Positionlist:
 
         Parameters
         ----------
-        layers : list of int or int
+        layers : int or list
             The layers to which you want to change the selected entries.
         selection : string
             Query string with which you make a selection. Defaults to all.
@@ -358,7 +358,7 @@ class Positionlist:
 
         Parameters
         ----------
-        area : numpy.array or list of len 4
+        area : array-like[4]
             The area we want to set the for the entries. Syntax is [left, bottom, right, top].
         selection : string
             Query string providing the selection on which to set the areas (defaults to ALL).
@@ -482,6 +482,24 @@ class Positionlist:
             polygons.sort(key=polygon_key)
             self.cells[i].add(*polygons)
 
+    def populateCells(self, library):
+        """
+        Populate the voyager.Positionlist.cells dictionary with the appropriate cells in the gdsii file.
+
+        Parameters
+        ----------
+        library : gdspy.GdsLibrary or gdstk.Library
+            The library from which the appropriate cells will be used to populate the cells.
+        """
+        if gdstk_key:
+            for i in library.cells:
+                if i.name in self.df['Comment'].values:
+                    self.cells[i.name] = name
+        else:
+            for i in np.unique(self.df['Comment'].values):
+                self.cells[i] = library.cells[i]
+
+
 
 def read_pls(filename):
     """
@@ -496,6 +514,11 @@ def read_pls(filename):
     -------
     out : voyager.Positionlist
         Positionlist containing the data in the file.
+
+    Notes
+    -----
+    The cells mentioned in the positionlist are obviously not linked to this voyager.Positionlist.
+    In order to populate the cells, such that functions like ``plot()`` and ``updateArea()`` can be used, use ``voyager.Positionlist.populateCells()``.
     """
     with open(filename, "r") as f:
         content = f.read().splitlines()
