@@ -6,6 +6,11 @@ import random
 from copy import copy
 from ._helpers import pls_header, wafermaps, ALL_VOYAGER, colours, rounderupper, dist, distMatrix, entry_adder, polygon_key, func_n, gdstk_key
 
+if gdstk_key:
+    import gdstk
+else:
+    import gdspy
+
 class Positionlist:
     """A dataframe containing the data for a positionlist to be used in the RAITH VOYAGER.
 
