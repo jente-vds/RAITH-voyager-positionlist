@@ -461,13 +461,14 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 
 <dl class="py method">
 <dt id="voyager.Positionlist.setArea">
-<code class="sig-name descname"><span class="pre">setArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setArea" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">setArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centered_on_structures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setArea" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the area of the selected entries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>area</strong> (<em>array-like</em><em>[</em><em>4</em><em>]</em>) – The area we want to set the for the entries. Syntax is [left, bottom, right, top].</p></li>
 <li><p><strong>selection</strong> (<em>string</em>) – Query string providing the selection on which to set the areas (defaults to ALL).</p></li>
+<li><p><strong>centered_on_strucutres</strong> (<em>bool</em>) – Whether to center the areas on the structures (default False).</p></li>
 </ul>
 </dd>
 </dl>
@@ -499,6 +500,20 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>stepsize</strong> (<em>float</em><em> or </em><em>tuple</em>) – The U and V stepsize. If not tuple, stepsizeU and stepsizeV will be the same.</p></li>
 <li><p><strong>selection</strong> (<em>string</em>) – Query string with which to select the entries.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.setDwelltime">
+<code class="sig-name descname"><span class="pre">setDwelltime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dwelltime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setDwelltime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the dwelltime for the selected entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dwelltime</strong> (<em>float</em>) – The dwelltime</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – Query string with which to select the entries to change</p></li>
 </ul>
 </dd>
 </dl>

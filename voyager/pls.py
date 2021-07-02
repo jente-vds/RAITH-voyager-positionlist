@@ -357,7 +357,7 @@ class Positionlist:
         """
         self.df.loc[self.df.query(selection).index, 'DoseFactor'] = dosefactor
 
-    def setArea(self, area, selection='@ALL_VOYAGER'):
+    def setArea(self, area, selection='@ALL_VOYAGER', centered_on_structures=False):
         """
         Set the area of the selected entries.
 
@@ -367,12 +367,21 @@ class Positionlist:
             The area we want to set the for the entries. Syntax is [left, bottom, right, top].
         selection : string
             Query string providing the selection on which to set the areas (defaults to ALL).
+        centered_on_strucutres : bool
+            Whether to center the areas on the structures (default False).
         """
         area = np.array(area).flatten()
         if len(area) != 4:
             raise ValueError("The area has to be a numpy array or list of length 4.")
         for i in self.df.query(selection).index:
-            self.df.at[i, 'Area'] = area
+            if centered_on_structures:
+                if gdstk:
+                    bb = np.flatten(self.cells[self.df.at[i, 'Comment']].bounding_box())
+                else:
+                    bb = np.flatten(self.cells[self.df.at[i, 'Comment']].get_bounding_box())
+                self.df.at[i, 'Area'] = area + np.array([bb[2]-bb[0], bb[3]-bb[1], bb[2]-bb[0], bb[3]-bb[1]])
+            else:
+                self.df.at[i, 'Area'] = area
 
     def updateArea(self, overwrite=False):
         """
@@ -423,6 +432,19 @@ class Positionlist:
             stepsize = (stepsize, stepsize)
         self.df.loc[self.df.query(selection).index, 'StepsizeU'] = stepsize[0]
         self.df.loc[self.df.query(selection).index, 'StepsizeV'] = stepsize[1]
+
+    def setDwelltime(self, dwelltime, selection='@ALL_VOYAGER'):
+        """
+        Set the dwelltime for the selected entries
+        
+        Parameters
+        ----------
+        dwelltime : float
+            The dwelltime
+        selection : string
+            Query string with which to select the entries to change
+        """
+        self.df.loc[self.df.query(selection).index, 'Dwelltime'] = dwelltime
 
     def setWaferlayout(self, wlo):
         """

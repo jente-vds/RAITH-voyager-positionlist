@@ -138,7 +138,7 @@ Let us try another example, but this time a little more difficult. It will demon
    for i, length in enumerate(lengths):
         name = 'length{}'.format(int(1e3*length))
         cell = gdstk.Cell(name)
-        cell.add(*gdstk.text('length {}'.format(int(1e3*length))
+        cell.add(*gdstk.text('length {}'.format(int(1e3*length)), size=20, position=(0,0)))
         pls.add(cell, (3.5, 4.4-0.200*i))
         pls.add(cell, (7.5, 4.4-0.200*i))
         pls.add(cell, (3.5, 8.4-0.200*i))
@@ -147,7 +147,7 @@ Let us try another example, but this time a little more difficult. It will demon
    for i, width in enumerate(widths):
         name = 'width{}'.format(int(1e3*width))
         cell = gdstk.Cell(name)
-        cell.add(*gdstk.text('width {}'.format(int(1e3*width))
+        cell.add(*gdstk.text('width {}'.format(int(1e3*width)), size=20, position=(0,0)))
         pls.add(cell, (3.5, 4.4-0.200*i))
         pls.add(cell, (7.5, 4.4-0.200*i))
         pls.add(cell, (3.5, 8.4-0.200*i))
@@ -164,5 +164,5 @@ Let us try another example, but this time a little more difficult. It will demon
 
    # Add a file
    pls.assignFile('example_advanced.gds')
-   lib.write_gds('example_adanced.gds')
+   lib.write_gds('example_advanced.gds')
    pls.write('example_advanced.pls')
