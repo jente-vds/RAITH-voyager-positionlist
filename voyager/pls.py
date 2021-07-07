@@ -58,6 +58,17 @@ class Positionlist:
             The layer(s) of the cell that you wish to write.
         dosefactor : float
             The dosefactor with which you wish to multiply the base dose of this entry.
+
+        Examples
+        --------
+        >>> polygon1 = gdstk.rectangle((-1,-1), (1,1), layer=0, datatype=1000)
+        >>> polygon2 = gdstk.ellipse((0,0), 1, layer=1, datatype=1000)
+        >>> cell = gdstk.Cell("test_cell")
+        >>> cell.add(polygon1)
+        >>> cell.add(polygon2)
+        >>> pls = voyager.Positionlist()
+        >>> pls.add(cell, (3,3), layer=0)
+        >>> pls.add(cell, (4,3), layer=1, dosefactor=1.2)
         """
         if gdstk_key:
             if not isinstance(cell, gdstk.Cell):
@@ -133,7 +144,7 @@ class Positionlist:
         """ 
         # stitch_wait 1.5 s
         # drive_speed 10 mm in 5.5 s
-        # polygon_nest 1 s
+        # polygonisation 1 s
         # writing time = (DwellTime)*TotalArea/(StepSize*LineSpacing) = AreaDose*StepSize*LineSpacing/BeamCurrent*TotalArea/(StepSize*LineSpacing)
         # [s] = 1e-14*[uC/cm^2]*[um^2]/[A]
         s = self.df.loc[0,'U'] + self.df.loc[0,'V'] + np.sum(self.df['U'].diff()) + np.sum(self.df['V'].diff())
@@ -526,7 +537,22 @@ class Positionlist:
             for i in np.unique(self.df['Comment'].values):
                 self.cells[i] = library.cells[i]
 
+    def setOption(self, option, selection='@ALL_VOYAGER'):
 
+        """
+        Set the option ofcertain entries. Has to be either STAY or DRIVE.
+
+        Parameters
+        ----------
+        option : str
+            The option to set. Has to be either STAY or DRIVE
+        selection : str
+            The selection on which you wish to set the option. Defaults to all.
+        """
+        options = {'STAY', 'DRIVE', np.nan}
+        if not option in options:
+            raise ValueError("The selected option has to be either \"STAY\" or \"DRIVE\"")
+        self.df.loc[self.df.query(selection).index, 'Options'] = option
 
 def read_pls(filename):
     """

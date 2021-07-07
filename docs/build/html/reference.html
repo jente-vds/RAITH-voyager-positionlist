@@ -182,40 +182,14 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>WaferLayout</strong> (<em>string</em>) – The wafer layout to be used for the positionlist. Has to be one of the possible wafermaps known by the VOYAGER (see wafermaps).</p>
 </dd>
-</dl>
-<dl class="py attribute">
-<dt id="voyager.Positionlist.wlo">
-<code class="sig-name descname"><span class="pre">wlo</span></code><a class="headerlink" href="#voyager.Positionlist.wlo" title="Permalink to this definition">¶</a></dt>
-<dd><p>The name of the wafer layout (with .wlo extension).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>string</p>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>wlo</strong> (<em>string</em>) – The name of the wafer layout (with .wlo extension).</p></li>
+<li><p><strong>df</strong> (<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>) – Pandas DataFrame storing all the necessary info for the VOYAGER, such as position, dose, cell name, etc.</p></li>
+<li><p><strong>cells</strong> (<em>dictionary</em>) – Dictionary containing all the cells in the positionlist, with the cell names acting as keys.</p></li>
+</ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="voyager.Positionlist.df">
-<code class="sig-name descname"><span class="pre">df</span></code><a class="headerlink" href="#voyager.Positionlist.df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pandas DataFrame storing all the necessary info for the VOYAGER, such as position, dose, cell name, etc.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="voyager.Positionlist.cells">
-<code class="sig-name descname"><span class="pre">cells</span></code><a class="headerlink" href="#voyager.Positionlist.cells" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dictionary containing all the cells in the positionlist, with the cell names acting as keys.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>dictionary</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="voyager.Positionlist.add">
 <code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dosefactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.add" title="Permalink to this definition">¶</a></dt>
@@ -230,20 +204,15 @@
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.remove">
-<code class="sig-name descname"><span class="pre">remove</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.remove" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes the specified selection from the positionlist. WARNING: By default the entrie positionlist will be removed!</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>selection</strong> (<em>string</em>) – Query string with which you select the entries you wish to remove.</p>
-</dd>
-</dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Positonlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;U &lt; 5&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Positionlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Comment == &#39;wrong_cell&#39;&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">polygon1</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">rectangle</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">polygon2</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">ellipse</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cell</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Cell</span><span class="p">(</span><span class="s2">&quot;test_cell&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cell</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">polygon1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cell</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">polygon2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pls</span> <span class="o">=</span> <span class="n">voyager</span><span class="o">.</span><span class="n">Positionlist</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dosefactor</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -269,73 +238,14 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.writingArea">
-<code class="sig-name descname"><span class="pre">writingArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.writingArea" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function will calculate the total area (in um^2) that you will write. If weighted is True, it will multiply the specific areas with their dose factor.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.writingTime">
-<code class="sig-name descname"><span class="pre">writingTime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BeamCurrent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AreaDose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">150</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.writingTime" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function gives an approximation of the total writing time in s.</p>
-<p>Function approximating the writing time. It includes stage movement. Bear in mind that this is an approximation and the actual writing time will probably be larger. If necessary, it is possible to first attempt to reduce writing time by using the voyager.Positionlist.shortSort() algorithm.</p>
+<dt id="voyager.Positionlist.assignWorkingAreas">
+<code class="sig-name descname"><span class="pre">assignWorkingAreas</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workingarea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.assignWorkingAreas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a working area to the selected entries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>BeamCurrent</strong> (<em>float</em>) – The beamcurrent you will use to write the structures (in A)</p></li>
-<li><p><strong>AreaDose</strong> (<em>float</em>) – The base dose for your resist in (uC/cm^2)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.shortSort">
-<code class="sig-name descname"><span class="pre">shortSort</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coolingRate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2e-05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.shortSort" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run a simulated annealing algorithm which will attempt to minimise the writing time of the voyager by finding the (approximate) shortest path between all the points.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.printout">
-<code class="sig-name descname"><span class="pre">printout</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.printout" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints out requested attributes of the Positionlist.</p>
-<p>More often than not, using print(voyager.Positionlist) should give you all the information you need. If you do have need of some more obscure functions such as setting the speed of FBMS, you can review it here.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>attributes</strong> (<em>list of strings</em>) – List of the attributes you wish to print out</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Positionlist</span><span class="o">.</span><span class="n">printout</span><span class="p">([</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Comment&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;FBMSArea&#39;</span><span class="p">,</span> <span class="s1">&#39;FBMSLines&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.translate">
-<code class="sig-name descname"><span class="pre">translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.translate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Translate the selection (defaults to all) by a specific translation (in UV [mm]).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>translation</strong> (<em>tuple</em>) – Vector with which you wish to translate the selected entries in UV (in mm).</p></li>
-<li><p><strong>selection</strong> (<em>string</em>) – Query string with which you select the entries to translate</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.rotate">
-<code class="sig-name descname"><span class="pre">rotate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.rotate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rotate the selected entries.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>angle</strong> (<em>float</em>) – Angle by which to rotate the slected entries (in radians)</p></li>
-<li><p><strong>reference</strong> (<em>'origin'</em><em>, </em><em>'corner'</em><em>,  </em><em>'center'</em><em>, or </em><em>tuple</em>) – Define the point around which the selection will be rotated.
-Origin will rotate around the origin, corner around the bottom left corner of the selection, center around its center.
-When reference is a tuple, the selection will be rotated around that point.</p></li>
+<li><p><strong>workingarea</strong> (<a class="reference internal" href="#voyager.WorkingAreas" title="voyager.WorkingAreas"><em>voyager.WorkingAreas</em></a>) – The working areas to be given to the positionlist. Has to be voyager.WorkingAreas containing working areas for all the cells in the positionlist.</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – Query string to make a selection on which to apply the operation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -376,84 +286,74 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.assignWorkingAreas">
-<code class="sig-name descname"><span class="pre">assignWorkingAreas</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workingarea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.assignWorkingAreas" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign a working area to the selected entries.</p>
+<dt id="voyager.Positionlist.plot">
+<code class="sig-name descname"><span class="pre">plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">writefield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the position of the cells in the current positionlist on the currently selected wafer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>workingarea</strong> (<a class="reference internal" href="#voyager.WorkingAreas" title="voyager.WorkingAreas"><em>voyager.WorkingAreas</em></a>) – The working areas to be given to the positionlist. Has to be voyager.WorkingAreas containing working areas for all the cells in the positionlist.</p></li>
-<li><p><strong>selection</strong> (<em>string</em>) – Query string to make a selection on which to apply the operation.</p></li>
+<li><p><strong>writefield</strong> (<em>float</em>) – The size of the writefield you intend to use</p></li>
+<li><p><strong>flatten</strong> (<em>bool</em>) – If flatten is passed, the plot will show the polygons where they will end up.</p></li>
+<li><p><strong>order</strong> (<em>bool</em>) – If order is passed, the order in which structures will be written is visible.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.write">
-<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write the Positionlist object to a .pls file.</p>
+<dt id="voyager.Positionlist.populateCells">
+<code class="sig-name descname"><span class="pre">populateCells</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.populateCells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate the voyager.Positionlist.cells dictionary with the appropriate cells in the gdsii file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>string</em>) – The name of the pls file (with .pls extension)</p></li>
-<li><p><strong>view</strong> (<em>string</em>) – This determines which columns of the positionlist are visible in the VOYAGER. Possible options are “default” and “minimal”.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>library</strong> (<em>gdspy.GdsLibrary</em><em> or </em><em>gdstk.Library</em>) – The library from which the appropriate cells will be used to populate the cells.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.setLayer">
-<code class="sig-name descname"><span class="pre">setLayer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setLayer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change the layers of the selected entries.</p>
+<dt id="voyager.Positionlist.printout">
+<code class="sig-name descname"><span class="pre">printout</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.printout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints out requested attributes of the Positionlist.</p>
+<p>More often than not, using print(voyager.Positionlist) should give you all the information you need. If you do have need of some more obscure functions such as setting the speed of FBMS, you can review it here.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>layers</strong> (<em>int</em><em> or </em><em>list</em>) – The layers to which you want to change the selected entries.</p></li>
-<li><p><strong>selection</strong> (<em>string</em>) – Query string with which you make a selection. Defaults to all.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>attributes</strong> (<em>list of strings</em>) – List of the attributes you wish to print out</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Positionlist</span><span class="o">.</span><span class="n">printout</span><span class="p">([</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Comment&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;FBMSArea&#39;</span><span class="p">,</span> <span class="s1">&#39;FBMSLines&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.setPosition">
-<code class="sig-name descname"><span class="pre">setPosition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setPosition" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the position of selected entries.</p>
+<dt id="voyager.Positionlist.remove">
+<code class="sig-name descname"><span class="pre">remove</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the specified selection from the positionlist. WARNING: By default the entrie positionlist will be removed!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>position</strong> (<em>tuple</em>) – The position that you wish to set</p></li>
-<li><p><strong>selection</strong> (<em>string</em>) – The query string with which you select the entries you wish to change.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>selection</strong> (<em>string</em>) – Query string with which you select the entries you wish to remove.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Positonlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;U &lt; 5&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Positionlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Comment == &#39;wrong_cell&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.setLink">
-<code class="sig-name descname"><span class="pre">setLink</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setLink" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set Link for the selected entries.</p>
+<dt id="voyager.Positionlist.rotate">
+<code class="sig-name descname"><span class="pre">rotate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate the selected entries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>link</strong> (<em>string</em>) – The required string</p></li>
-<li><p><strong>selection</strong> (<em>string</em>) – The query string with which the entries to change are selected (defaults to ALL).</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.setDoseFactor">
-<code class="sig-name descname"><span class="pre">setDoseFactor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dosefactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setDoseFactor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set dose factor for the selected entries.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dosefactor</strong> (<em>float</em>) – The required dose factor</p></li>
-<li><p><strong>selection</strong> (<em>string</em>) – The query string with which the entries to change are selected (defaults to ALL).</p></li>
+<li><p><strong>angle</strong> (<em>float</em>) – Angle by which to rotate the slected entries (in radians)</p></li>
+<li><p><strong>reference</strong> (<em>'origin'</em><em>, </em><em>'corner'</em><em>,  </em><em>'center'</em><em>, or </em><em>tuple</em>) – Define the point around which the selection will be rotated.
+Origin will rotate around the origin, corner around the bottom left corner of the selection, center around its center.
+When reference is a tuple, the selection will be rotated around that point.</p></li>
 </ul>
 </dd>
 </dl>
@@ -475,31 +375,14 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.updateArea">
-<code class="sig-name descname"><span class="pre">updateArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.updateArea" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update empty Area entries to corresponding cell bounding box.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>overwrite</strong> (<em>bool</em>) – Overwrite non-empty areas as well.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.toggleStepsize">
-<code class="sig-name descname"><span class="pre">toggleStepsize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.toggleStepsize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Toggle the usage of stepsize (necessary for dual beam).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="voyager.Positionlist.setStepsize">
-<code class="sig-name descname"><span class="pre">setStepsize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stepsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setStepsize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set StepsizeU and StepsizeV for the selected entries</p>
+<dt id="voyager.Positionlist.setDoseFactor">
+<code class="sig-name descname"><span class="pre">setDoseFactor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dosefactor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setDoseFactor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set dose factor for the selected entries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>stepsize</strong> (<em>float</em><em> or </em><em>tuple</em>) – The U and V stepsize. If not tuple, stepsizeU and stepsizeV will be the same.</p></li>
-<li><p><strong>selection</strong> (<em>string</em>) – Query string with which to select the entries.</p></li>
+<li><p><strong>dosefactor</strong> (<em>float</em>) – The required dose factor</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – The query string with which the entries to change are selected (defaults to ALL).</p></li>
 </ul>
 </dd>
 </dl>
@@ -520,6 +403,76 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 </dd></dl>
 
 <dl class="py method">
+<dt id="voyager.Positionlist.setLayer">
+<code class="sig-name descname"><span class="pre">setLayer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the layers of the selected entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> (<em>int</em><em> or </em><em>list</em>) – The layers to which you want to change the selected entries.</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – Query string with which you make a selection. Defaults to all.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.setLink">
+<code class="sig-name descname"><span class="pre">setLink</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set Link for the selected entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>link</strong> (<em>string</em>) – The required string</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – The query string with which the entries to change are selected (defaults to ALL).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.setOption">
+<code class="sig-name descname"><span class="pre">setOption</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the option ofcertain entries. Has to be either STAY or DRIVE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>option</strong> (<em>str</em>) – The option to set. Has to be either STAY or DRIVE</p></li>
+<li><p><strong>selection</strong> (<em>str</em>) – The selection on which you wish to set the option. Defaults to all.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.setPosition">
+<code class="sig-name descname"><span class="pre">setPosition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the position of selected entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<em>tuple</em>) – The position that you wish to set</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – The query string with which you select the entries you wish to change.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.setStepsize">
+<code class="sig-name descname"><span class="pre">setStepsize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stepsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setStepsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set StepsizeU and StepsizeV for the selected entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stepsize</strong> (<em>float</em><em> or </em><em>tuple</em>) – The U and V stepsize. If not tuple, stepsizeU and stepsizeV will be the same.</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – Query string with which to select the entries.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="voyager.Positionlist.setWaferlayout">
 <code class="sig-name descname"><span class="pre">setWaferlayout</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wlo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.setWaferlayout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the wafer layout of the positionlist</p>
@@ -531,18 +484,9 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.plot">
-<code class="sig-name descname"><span class="pre">plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">writefield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the position of the cells in the current positionlist on the currently selected wafer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>writefield</strong> (<em>float</em>) – The size of the writefield you intend to use</p></li>
-<li><p><strong>flatten</strong> (<em>bool</em>) – If flatten is passed, the plot will show the polygons where they will end up.</p></li>
-<li><p><strong>order</strong> (<em>bool</em>) – If order is passed, the order in which structures will be written is visible.</p></li>
-</ul>
-</dd>
-</dl>
+<dt id="voyager.Positionlist.shortSort">
+<code class="sig-name descname"><span class="pre">shortSort</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coolingRate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2e-05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.shortSort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a simulated annealing algorithm which will attempt to minimise the writing time of the voyager by finding the (approximate) shortest path between all the points.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -552,12 +496,67 @@ When reference is a tuple, the selection will be rotated around that point.</p><
 </dd></dl>
 
 <dl class="py method">
-<dt id="voyager.Positionlist.populateCells">
-<code class="sig-name descname"><span class="pre">populateCells</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.populateCells" title="Permalink to this definition">¶</a></dt>
-<dd><p>Populate the voyager.Positionlist.cells dictionary with the appropriate cells in the gdsii file.</p>
+<dt id="voyager.Positionlist.toggleStepsize">
+<code class="sig-name descname"><span class="pre">toggleStepsize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.toggleStepsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle the usage of stepsize (necessary for dual beam).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.translate">
+<code class="sig-name descname"><span class="pre">translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;ALL_VOYAGER'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate the selection (defaults to all) by a specific translation (in UV [mm]).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>library</strong> (<em>gdspy.GdsLibrary</em><em> or </em><em>gdstk.Library</em>) – The library from which the appropriate cells will be used to populate the cells.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>translation</strong> (<em>tuple</em>) – Vector with which you wish to translate the selected entries in UV (in mm).</p></li>
+<li><p><strong>selection</strong> (<em>string</em>) – Query string with which you select the entries to translate</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.updateArea">
+<code class="sig-name descname"><span class="pre">updateArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.updateArea" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update empty Area entries to corresponding cell bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>overwrite</strong> (<em>bool</em>) – Overwrite non-empty areas as well.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.write">
+<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the Positionlist object to a .pls file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>string</em>) – The name of the pls file (with .pls extension)</p></li>
+<li><p><strong>view</strong> (<em>string</em>) – This determines which columns of the positionlist are visible in the VOYAGER. Possible options are “default” and “minimal”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.writingArea">
+<code class="sig-name descname"><span class="pre">writingArea</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.writingArea" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will calculate the total area (in um^2) that you will write. If weighted is True, it will multiply the specific areas with their dose factor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="voyager.Positionlist.writingTime">
+<code class="sig-name descname"><span class="pre">writingTime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BeamCurrent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AreaDose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">150</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.Positionlist.writingTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function gives an approximation of the total writing time in s.</p>
+<p>Function approximating the writing time. It includes stage movement. Bear in mind that this is an approximation and the actual writing time will probably be larger. If necessary, it is possible to first attempt to reduce writing time by using the voyager.Positionlist.shortSort() algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BeamCurrent</strong> (<em>float</em>) – The beamcurrent you will use to write the structures (in A)</p></li>
+<li><p><strong>AreaDose</strong> (<em>float</em>) – The base dose for your resist in (uC/cm^2)</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -603,29 +602,13 @@ In order to populate the cells, such that functions like <code class="docutils l
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>unit</strong> (<em>float</em>) – This value has to equal the database unit used in the corresponding GDSII file</p>
 </dd>
-</dl>
-<dl class="py attribute">
-<dt id="voyager.WorkingAreas.cells">
-<code class="sig-name descname"><span class="pre">cells</span></code><a class="headerlink" href="#voyager.WorkingAreas.cells" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dictionary containing the objects storing the working areas</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>dictionary</p>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>cells</strong> (<em>dictionary</em>) – Dictionary containing the objects storing the working areas</p></li>
+<li><p><strong>unit</strong> (<em>float</em>) – The precision defined for this .wor file.</p></li>
+</ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="voyager.WorkingAreas.unit">
-<code class="sig-name descname"><span class="pre">unit</span></code><a class="headerlink" href="#voyager.WorkingAreas.unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>The precision defined for this .wor file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="voyager.WorkingAreas.add">
 <code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_area</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voyager.WorkingAreas.add" title="Permalink to this definition">¶</a></dt>

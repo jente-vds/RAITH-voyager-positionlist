@@ -33,11 +33,15 @@ release = vv
 # ones.
 extensions = [
         'sphinx.ext.napoleon',
-        "sphinx.ext.autodoc"
+        "sphinx.ext.autodoc",
+        "sphinx.ext.autosummary"
 ]
 
 # Autodoc settings
-autodoc_member_order = "bysource"
+autodoc_member_order = "alphabetical"
+
+autosummary_generate = True
+autosummary_imported_members = True
 
 napoleon_google_docstring = False
 napoleon_numpy_docstring = True
@@ -47,7 +51,7 @@ napoleon_include_special_with_doc = True
 napoleon_use_admonition_for_examples = False
 napoleon_use_admonition_for_notes = False
 napoleon_use_admonition_for_references = False
-napoleon_use_ivar = False
+napoleon_use_ivar = True
 napoleon_use_param = True
 napoleon_use_rtype = True
 napoleon_type_aliases = None
@@ -70,7 +74,11 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 
 html_theme_options={
-        'display_version':True}
+        'display_version': True,
+        "collapse_navigation": True,
+        "sticky_navigation": True,
+        "navigation_depth": -1
+        }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
