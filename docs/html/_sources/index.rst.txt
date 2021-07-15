@@ -1,6 +1,6 @@
-##############################
-Voyager-python's documentation
-##############################
+########################################
+RAITH-voyager-positionlist documentation
+########################################
 
 The RAITH VOYAGER is an electron beam lithography system. It takes an input file containing polygons, paths and shapes in order to write these structures on a sample. The most commonly used file is a GDSII file, with a :literal:`.gds` extension.
 
