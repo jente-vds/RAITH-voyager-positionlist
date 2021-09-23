@@ -578,11 +578,11 @@ def read_pls(filename):
     index_HEADER = content.index('[HEADER]')
     index_COLUMNS = content.index('[COLUMNS]')
     index_DATA = content.index('[DATA]')
-    index_WAFERLAYOUT = [i.find('WAFERLAYOUT') for i in content].find(0)
+    index_WAFERLAYOUT = [i.find('WAFERLAYOUT') for i in content].index(0)
     wlo = content[index_WAFERLAYOUT][content[index_WAFERLAYOUT].find('=')+1:]
     poslist = Positionlist(WaferLayout=wlo)
     columns = []
-    for i in content[index_COLUMNS:index_DATA]:
+    for i in content[index_COLUMNS+1:index_DATA]:
         if i.find != -1:
             name = i[0:i.find('=')]
             if name != 'No.':
