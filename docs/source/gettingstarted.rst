@@ -156,7 +156,7 @@ Let us try another example, but this time a little more difficult. It will demon
    # Now of course, everything is ordered poorly. So let us change it such that those things near each other, will be written after one another
    pls.shortSort()
 
-   # Let us also make sure that all the structres we write will be centered at the the writefield, and not in the corner, as the VOYAGER is apt to do.
+   # Let us also make sure that all the structures we write will be centered at the the writefield, and not in the corner, as the VOYAGER is apt to do.
    pls.setArea(np.array([-100,-100,100,100]))
 
    # Now let us check the ordering and the structures
